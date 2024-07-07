@@ -3,39 +3,43 @@
 //Problem Link : https://www.acmicpc.net/problem/2437
 
 #include <iostream>
+#include <vector>
 #include <algorithm>
+
+typedef long long LL;
 
 using namespace std;
 
-int weight[1001];
+vector<LL> in;
+vector<vector<LL>> out;
 
-int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
+int main(void) {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
 
-	int n;
-	cin >> n;
+    int n;
 
-	for (int i = 0; i < n; i++) {
-		cin >> weight[i];
-	}
-	sort(weight, weight + n);
+    cin >> n;
+    in.resize(n);
+    out.resize(n);
 
-	int ans = 0;
-	int i;
-	for (i = 0; i < n; i++) {
-		if (weight[i] > ans + 1) {
-			cout << ans + 1;
-			break;
-		}
-		
-		ans += weight[i];
-	}
+    for (int i = 0; i < n; i++) {
+        cin >> in[i];
+    }
 
-	if (i == n) {
-		cout << ans + 1;
-	}
+    sort(in.begin(), in.end());
 
-	return 0;
+    int max = 0;
 
+    for (int i = 0; i < n; i++) {
+        if (max + 1 < in[i]) {
+            break;
+        }
+
+        max += in[i];
+    }
+
+    cout << max + 1;
+
+    return 0;
 }
